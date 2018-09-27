@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace _02FirstApp
 {
@@ -6,7 +7,19 @@ namespace _02FirstApp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            using (helloappdbContext db = new helloappdbContext())
+            {
+                // get objects from db
+                var users = db.Users.ToList();
+                Console.WriteLine("Список объектов");
+                foreach (User u in users)
+                {
+                    Console.WriteLine($"{u.Id}.{u.Name}-{u.Age}");
+                }
+            }
+
+            Console.ReadKey();
+
         }
     }
 }
